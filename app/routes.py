@@ -1,6 +1,5 @@
 from app import app
-# from app.controller import UserControll
-from app.controller import UserControll
+from app.controller import UserController
 from flask import request
 
 
@@ -11,4 +10,14 @@ def index():
 
 @app.route('/createUser', methods=['POST'])
 def createUsers():
-    return UserControll.CreateUser()
+    return UserController.CreateUser()
+
+
+@app.route('/tampilUser', methods=['GET'])
+def tampilUsers():
+    return UserController.tampilUser()
+
+
+@app.route('/tampilUserDetail', methods=['GET'])
+def tampilUsersDetail():
+    return UserController.tampilDetail()
