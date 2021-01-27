@@ -43,3 +43,5 @@ def update_Book(id):
         return BukuController.updateBook(id)
     elif request.method == 'GET':
         return BukuController.detailBook(id)
+    else:
+        return BukuController.hapusBook(id)

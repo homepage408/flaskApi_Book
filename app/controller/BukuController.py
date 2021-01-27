@@ -90,7 +90,7 @@ def createBook():
 
 
 def hapusBook(id):
-    book = Book.query.filter_by(nomor_buku=id).first()
+    book = Buku.query.filter_by(nomor_buku=id).first()
 
     if book == None:
         return response.badRequest('', f'Buku dengan nomor #{id} tidak ada')
