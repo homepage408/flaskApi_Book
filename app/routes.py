@@ -8,14 +8,12 @@ def index():
     return "Hello Flask"
 
 
-@app.route('/createUser', methods=['POST'])
+@app.route('/user', methods=['GET', 'POST'])
 def createUsers():
-    return UserController.CreateUser()
-
-
-@app.route('/tampilUser', methods=['GET'])
-def tampilUsers():
-    return UserController.tampilUser()
+    if request.method == 'GET':
+        return UserController.CreateUser()
+    else:
+        return UserController.tampilUser()
 
 
 @app.route('/tampilUserDetail', methods=['GET'])

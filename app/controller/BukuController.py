@@ -47,17 +47,23 @@ def createBook():
     create_at = datetime.utcnow()
     update_at = datetime.utcnow()
 
-    book = Buku(nomor_buku=nomor_buku,
-                judul=judul,
-                pengarang=pengarang,
-                tahun_terbit=tahun_terbit,
-                penerbit=penerbit,
-                created_at=create_at,
-                update_at=update_at)
+    buku = Buku.query.filter_by(nomor_buku=nomor_buku).first()
 
-    try:
-        db.session.add(book)
-        db.session.commit()
-        return response.success('', 'Berhasil Mebambahkan Buku')
-    except Exception as e:
-        return response.badRequest('', 'Gagal menambahkan Buku !!!')
+    if not buku:
+        book = Buku(nomor_buku=nomor_buku,
+                    judul=judul,
+                    pengarang=pengarang,
+                    tahun_terbit=tahun_terbit,
+                    penerbit=penerbit,
+                    created_at=create_at,
+                    update_at=update_at)
+
+        try:
+            db.session.add(book)
+            db.session.commit()
+            return response.success('', 'Berhasil Mebambahkan Buku')
+        except Exception as e:
+            return response.badRequest('', 'Gagal menambahkan Buku !!!')
+    else:
+        return response.badRequest(
+            '', f'Buku dengan nomor #{nomor_buku} sudah ada')
