@@ -1,5 +1,5 @@
 from app import app
-from app.controller import UserController
+from app.controller import UserController, BukuController
 from flask import request
 
 
@@ -21,3 +21,11 @@ def tampilUsers():
 @app.route('/tampilUserDetail', methods=['GET'])
 def tampilUsersDetail():
     return UserController.tampilDetail()
+
+
+@app.route('/books', methods=['GET', 'POST'])
+def daftarBuku():
+    if request.method == 'GET':
+        return BukuController.index()
+    else:
+        return BukuController.createBook()

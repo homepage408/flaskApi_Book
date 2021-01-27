@@ -8,6 +8,7 @@ from flask import request
 
 
 def CreateUser():
+    '''Untuk Membuat User Admin dan Mahasiswa'''
     try:
         # req_data = request.get_json()
         npm = request.form.get('npm')
@@ -29,6 +30,7 @@ def CreateUser():
 
 
 def tampilUser():
+    '''Tampil User ini digunakan untuk Menampilkan keseluruhan user yang terdaftar pada table user '''
     try:
         users = User.query.all()
         data = formatArray(users)
@@ -39,6 +41,7 @@ def tampilUser():
 
 
 def formatArray(datas):
+    '''Fungsi ini digunakan untuk melakukan looping terhadap dara user '''
     array = []
     for i in datas:
         array.append(tampilObject(i))
@@ -46,6 +49,7 @@ def formatArray(datas):
 
 
 def tampilObject(data):
+    '''Serialize ini digunakan untuk memparsing data dari looping "formatArray" '''
     data = {
         'id_user': data.id_user,
         'npm': data.npm,
@@ -58,6 +62,8 @@ def tampilObject(data):
 
 
 def tampilDetail():
+    '''Fungsi ini digunakan untuk menampilkan data pada table User dengan menggunakan fungsi
+    Join untuk mendapatkan nilai yang lebih Detail '''
     users = db.session.query(User.id_user, User.npm, User.nama, User.email,
                              User.password, User.level, Level.id_level,
                              Level.keterangan).join(Level).filter(
@@ -76,6 +82,7 @@ def tampilDetail():
 
 
 def formatArrrayDetail(datas):
+    '''Ini digunakan untuk melakukan looping terhadap data looping tampil Detail '''
     array = []
     for i in datas:
         array.append(tampilObjectDetail(i))
@@ -83,6 +90,7 @@ def formatArrrayDetail(datas):
 
 
 def tampilObjectDetail(data):
+    '''Digunakan untuk melakukan parsing data dari looping array detail untuk fungsi tampil detail'''
     data = {
         'id_user': data.id_user,
         'npm': data.npm,
