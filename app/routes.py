@@ -50,3 +50,8 @@ def update_Book(id):
 @app.route('/mahasiswa', methods=['GET'])
 def detailMahasiswa():
     return MahasiswaController.detailMahasiwa()
+
+
+@app.route('/mahasiswa/<npm>', methods=['GET'])
+def detailMahasiswabynpm(npm):
+    return MahasiswaController.detailMahasiswabynpm(npm)
