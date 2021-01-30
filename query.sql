@@ -12,3 +12,19 @@ INNER JOIN prodi
 INNER JOIN fakultas
 INNER JOIN level 
 ON user.level = level.id_level and user.npm = mahasiswa.npm and mahasiswa.prodi = prodi.id_prodi and prodi.id_fakultas = fakultas.id_fakultas;
+
+use flask_api_book;
+
+select * from mahasiswa;
+
+select mahasiswa.npm, mahasiswa.nama, mahasiswa.no_hp, mahasiswa.angkatan, mahasiswa.alamat, prodi.nama_prodi, fakultas.nama_fakultas
+from mahasiswa
+inner join prodi
+inner join fakultas
+on mahasiswa.prodi = prodi.id_prodi and prodi.id_fakultas = fakultas.id_fakultas
+where mahasiswa.npm = 5160411059;
+
+
+
+
+

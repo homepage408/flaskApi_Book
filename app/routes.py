@@ -1,5 +1,5 @@
 from app import app
-from app.controller import UserController, BukuController
+from app.controller import UserController, BukuController, MahasiswaController
 from flask import request
 
 
@@ -45,3 +45,8 @@ def update_Book(id):
         return BukuController.detailBook(id)
     else:
         return BukuController.hapusBook(id)
+
+
+@app.route('/mahasiswa', methods=['GET'])
+def detailMahasiswa():
+    return MahasiswaController.detailMahasiwa()
