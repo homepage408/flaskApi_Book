@@ -47,11 +47,19 @@ def update_Book(id):
         return BukuController.hapusBook(id)
 
 
-@app.route('/mahasiswa', methods=['GET'])
+@app.route('/mahasiswa', methods=['GET', 'POST'])
 def detailMahasiswa():
-    return MahasiswaController.detailMahasiwa()
+    if request.method == 'GET':
+        return MahasiswaController.detailMahasiwa()
+    else:
+        return MahasiswaController.saveMahasiswa()
 
 
-@app.route('/mahasiswa/<npm>', methods=['GET'])
+@app.route('/mahasiswa/<npm>', methods=['GET', 'PUT', 'DELETE'])
 def detailMahasiswabynpm(npm):
-    return MahasiswaController.detailMahasiswabynpm(npm)
+    if request.method == 'GET':
+        return MahasiswaController.detailMahasiswabynpm(npm)
+    elif request.method == 'PUT':
+        return MahasiswaController.editMahasiswa(npm)
+    else:
+        return MahasiswaController.deleteMahasiswa(npm)

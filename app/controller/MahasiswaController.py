@@ -34,32 +34,28 @@ def detailMahasiwa():
 
 
 def saveMahasiswa():
-    try:
-        data_req = request.get_json()
-        npm = data_req.get('npm')
-        nama = data_req.get('nama')
-        no_hp = data_req.get('no_hp')
-        angkatan = data_req.get('angkatan')
-        alamat = data_req.get('alamat')
-        prodi = data_req.get('prodi')
+    data_req = request.get_json()
+    npm = data_req.get('npm')
+    nama = data_req.get('nama')
+    no_hp = data_req.get('no_hp')
+    angkatan = data_req.get('angkatan')
+    alamat = data_req.get('alamat')
+    prodi = data_req.get('prodi')
 
-        mahasiswa = Mahasiswa.query.filter_by(npm=npm).first()
+    mahasiswa = Mahasiswa.query.filter_by(npm=npm).first()
 
-        if mahasiswa is None:
-            data = Mahasiswa(npm=npm, nama=nama, no_hp=no_hp,
-                             angkatan=angkatan, alamat=alamat, prodi=prodi)
+    if mahasiswa == None:
+        data = Mahasiswa(npm=npm, nama=nama, no_hp=no_hp,
+                         angkatan=angkatan, alamat=alamat, prodi=prodi)
 
-            try:
-                db.session.add(data)
-                db.session.commit()
-
-                return response.success('', 'Data Berhasil di tambahkan')
-            except Exception as e:
-                return response.badRequest('', 'Data Gagal di tambahkan')
-        else:
-            return response.badRequest('', f'Mahasiswa dengan npm #{npm} sudah ada')
-    except Exception as e:
-        print(e)
+        try:
+            db.session.add(data)
+            db.session.commit()
+            return response.success('', 'Data Berhasil di tambahkan')
+        except Exception as e:
+            return response.badRequest('', 'Data Gagal di tambahkan')
+    else:
+        return response.badRequest('', f'Mahasiswa dengan npm #{npm} sudah ada')
 
 
 def detailMahasiswabynpm(npm):
@@ -99,7 +95,7 @@ def editMahasiswa(npm):
 
 
 def deleteMahasiswa(npm):
-    mhs = Mahasiswa.query(npm=npm).first()
+    mhs = Mahasiswa.query.filter_by(npm=npm).first()
 
     if mhs is None:
         return response.badRequest('', f'Mahasiswa dengan NPM #{npm} tidak ada')
